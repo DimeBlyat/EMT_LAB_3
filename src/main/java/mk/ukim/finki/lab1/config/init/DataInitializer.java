@@ -11,6 +11,7 @@ import mk.ukim.finki.lab1.repository.AccommodationRepository;
 import mk.ukim.finki.lab1.repository.CountryRepository;
 import mk.ukim.finki.lab1.repository.HostRepository;
 import mk.ukim.finki.lab1.repository.UserRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

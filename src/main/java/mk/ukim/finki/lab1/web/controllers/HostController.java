@@ -6,7 +6,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import mk.ukim.finki.lab1.dto.DisplayHostDto;
 import mk.ukim.finki.lab1.model.domain.Host;
 import mk.ukim.finki.lab1.dto.CreateHostDto;
+import mk.ukim.finki.lab1.model.projections.UserProjection;
+import mk.ukim.finki.lab1.model.views.HostByCountry;
 import mk.ukim.finki.lab1.service.application.HostApplicationService;
+import mk.ukim.finki.lab1.service.domain.HostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +21,21 @@ import java.util.List;
 public class HostController {
 
     private final HostApplicationService hostService;
+    private final HostService service;
 
-    public HostController(HostApplicationService hostService) {
+    public HostController(HostApplicationService hostService, HostService service) {
         this.hostService = hostService;
+        this.service = service;
+    }
+
+    @GetMapping("/by-country")
+    public ResponseEntity<List<HostByCountry>> getHostsByCountry() {
+        return ResponseEntity.ok(service.getHostsByCountry());
+    }
+
+    @GetMapping("/names")
+    public List<UserProjection> getAllHostNames() {
+        return service.findAllNames();
     }
 
     @Operation(summary = "Get all hosts", description = "Find all hosts")
