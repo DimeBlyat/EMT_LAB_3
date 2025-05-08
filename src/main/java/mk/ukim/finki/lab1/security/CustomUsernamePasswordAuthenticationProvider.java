@@ -1,4 +1,4 @@
-package mk.ukim.finki.lab1.config.security;
+package mk.ukim.finki.lab1.security;
 
 import mk.ukim.finki.lab1.service.domain.UserService;
 import org.springframework.security.authentication.AuthenticationProvider;

@@ -1,4 +1,4 @@
-package mk.ukim.finki.lab1.web;
+package mk.ukim.finki.lab1.web.controllers;
 
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import mk.ukim.finki.lab1.dto.DisplayHostDto;
 import mk.ukim.finki.lab1.model.domain.Host;
 import mk.ukim.finki.lab1.dto.CreateHostDto;
+import mk.ukim.finki.lab1.model.projections.HostProjection;
 import mk.ukim.finki.lab1.model.projections.UserProjection;
 import mk.ukim.finki.lab1.model.views.HostByCountry;
 import mk.ukim.finki.lab1.service.application.HostApplicationService;
@@ -34,7 +35,7 @@ public class HostController {
     }
 
     @GetMapping("/names")
-    public List<UserProjection> getAllHostNames() {
+    public List<HostProjection> getAllHostNames() {
         return service.findAllNames();
     }
 

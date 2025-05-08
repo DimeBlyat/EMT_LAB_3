@@ -1,5 +1,6 @@
-package mk.ukim.finki.lab1.config;
+package mk.ukim.finki.lab1.config.security;
 
+import mk.ukim.finki.lab1.security.CustomUsernamePasswordAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

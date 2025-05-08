@@ -2,10 +2,7 @@ package mk.ukim.finki.lab1.service.domain.impl;
 
 import mk.ukim.finki.lab1.model.domain.User;
 import mk.ukim.finki.lab1.model.enumerations.Role;
-import mk.ukim.finki.lab1.model.exceptions.InvalidArgumentsException;
-import mk.ukim.finki.lab1.model.exceptions.PasswordsDoNotMatchException;
-import mk.ukim.finki.lab1.model.exceptions.UsernameAlreadyExistsException;
-import mk.ukim.finki.lab1.model.exceptions.InvalidUserCredentialsException;
+import mk.ukim.finki.lab1.model.exceptions.*;
 import mk.ukim.finki.lab1.repository.UserRepository;
 import mk.ukim.finki.lab1.service.domain.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,7 +43,7 @@ public class UserServiceImpl implements UserService {
             Role userRole
     ) {
         if (username == null || username.isEmpty() || password == null || password.isEmpty())
-            throw new RuntimeException();
+            throw new InvalidUsernameOrPasswordException();
         if (!password.equals(repeatPassword)) throw new PasswordsDoNotMatchException();
         if (userRepository.findByUsername(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
@@ -56,10 +53,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String username, String password) {
-        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+        if (username == null || username.isEmpty() || password == null || password.isEmpty())
             throw new InvalidArgumentsException();
-        }
-        return userRepository.findByUsernameAndPassword(username, password).orElseThrow(
-                InvalidUserCredentialsException::new);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(username));
+        if (!passwordEncoder.matches(password, user.getPassword()))
+            throw new InvalidUserCredentialsException();
+        return user;
     }
 }
