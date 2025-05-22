@@ -26,8 +26,8 @@ public class TemporaryReservationApplicationServiceImpl implements TemporaryRese
 
     @Override
     public List<DisplayAccommodationDto> getTemporaryReservations(String username) {
-        List<Accommodation> smestuvanjes = temporaryReservationService.getTemporaryReservations(username);
-        return smestuvanjes.stream().map(DisplayAccommodationDto::from).toList();
+        List<Accommodation> accommodations = temporaryReservationService.getTemporaryReservations(username);
+        return accommodations.stream().map(DisplayAccommodationDto::from).toList();
     }
 
     @Override

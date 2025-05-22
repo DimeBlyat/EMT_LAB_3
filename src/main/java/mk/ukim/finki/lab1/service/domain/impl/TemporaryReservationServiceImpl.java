@@ -41,7 +41,7 @@ public class TemporaryReservationServiceImpl implements TemporaryReservationServ
             temporaryReservationRepository.save(reservation);
         }
         System.out.println("Username: " + username);
-        System.out.println("Smestuvanje ID: " + accommodationId);
+        System.out.println("Accommodation ID: " + accommodationId);
         System.out.println("Already exists: " + temporaryReservationRepository.existsByUserAndAccommodation(user, accommodation));
         return accommodation;
     }
